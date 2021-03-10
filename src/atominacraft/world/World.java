@@ -1,10 +1,9 @@
 package atominacraft.world;
 
 import atominacraft.world.chunk.Chunk;
-import atominacraft.world.chunk.ChunkCoordinates;
+import atominacraft.world.chunk.ChunkLocation;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class World {
     public int worldId;
@@ -16,7 +15,7 @@ public class World {
      *
      * The key (hashcode) is the combination of the X and Z coordinates (for fast and easy access to chunks)
      */
-    private final HashMap<Integer, Chunk> chunks;
+    public final HashMap<Integer, Chunk> chunks;
 
     public World(int id, String name) {
         this.worldId = id;
@@ -36,7 +35,7 @@ public class World {
     }
 
     public Chunk createChunk(int x, int z) {
-        ChunkCoordinates coordinates = new ChunkCoordinates(x, z);
+        ChunkLocation coordinates = new ChunkLocation(x, z);
         Chunk chunk = new Chunk(coordinates);
         chunks.put(coordinates.hashCode(), chunk);
         return chunk;

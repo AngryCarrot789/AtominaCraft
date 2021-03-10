@@ -1,5 +1,7 @@
 package atominacraft.maths;
 
+import atominacraft.utils.HashHelper;
+
 public class Vector2 {
     public float x;
     public float y;
@@ -40,7 +42,7 @@ public class Vector2 {
 
     @Override
     public int hashCode() {
-        return Float.hashCode(x) + Float.hashCode(y);
+        return HashHelper.getHashf(this.x, this.y);
     }
 
     @Override

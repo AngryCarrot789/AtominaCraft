@@ -1,9 +1,11 @@
 package atominacraft.entity;
 
+import atominacraft.block.grid.GridLatch;
 import atominacraft.maths.Matrix4;
 import atominacraft.maths.Vector3;
 import atominacraft.time.GameTime;
 import atominacraft.world.World;
+import atominacraft.world.chunk.Chunk;
 
 public class Entity {
     public static int nextId = 0;
@@ -43,6 +45,11 @@ public class Entity {
     public void moveTo(Vector3 position) {
         this.previousPosition.set(this.position);
         this.position.set(position);
+    }
+
+    public Chunk getChunk() {
+        //return this.world.getChunkAt(GridLatch.MTWGetChunk(position));
+        return null;
     }
 
     public static Matrix4 worldToLocal(Entity entity) {

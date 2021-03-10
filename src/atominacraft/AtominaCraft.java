@@ -1,5 +1,7 @@
 package atominacraft;
 
+import atominacraft.block.Block;
+import atominacraft.block.grid.GridLatch;
 import atominacraft.client.graphics.DebugDrawing;
 import atominacraft.client.graphics.GraphicsLoader;
 import atominacraft.client.graphics.shaders.PinkShader;
@@ -14,6 +16,7 @@ import atominacraft.client.window.Window;
 import atominacraft.utils.ResourceLocator;
 import atominacraft.world.World;
 import atominacraft.world.WorldManager;
+import atominacraft.world.chunk.Chunk;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -57,6 +60,15 @@ public class AtominaCraft {
         Camera camera = new Camera(mainWindow.getWidth(), mainWindow.getHeight(), 0.1f, 100.0f, 75.0f);
         mainPlayer = new CameraPlayer(earth, camera);
         mainPlayer.moveTo(new Vector3(0, 0, 4));
+
+        Chunk chunk = earth.createChunk(0, 0);
+        for(int y = 0; y < 32; y++) {
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    chunk.setBlock(Block.TEMPLATE_DIRT.copyTemplate(), x, y, z);
+                }
+            }
+        }
 
         shader = (PinkShader) GraphicsLoader.getShader("pink");
 
@@ -114,13 +126,20 @@ public class AtominaCraft {
         shader.use();
         shader.setMatrix(Matrix4.multiply(cam, ltw));
 
-        DebugDrawing.drawCube(this.mainPlayer.camera, Vector3.Zero, Vector3.One);
+        for(Chunk chunk : mainPlayer.world.chunks.values()) {
+            for(Block block : chunk.blocks.values()) {
+                Vector3 pos = GridLatch.WTMGetBlock(block.location);
+                DebugDrawing.drawCube(this.mainPlayer.camera, pos, GridLatch.BlockScaleV);
+            }
+        }
 
-        GL11.glBegin(GL11.GL_TRIANGLES);
-        GL11.glVertex3f( 0.5f, -0.5f, 0.0f);
-        GL11.glVertex3f(-0.5f, -0.5f, 0.0f);
-        GL11.glVertex3f( 0.0f,  0.5f, 0.0f);
-        GL11.glEnd();
+        //DebugDrawing.drawCube(this.mainPlayer.camera, Vector3.Zero, Vector3.One);
+
+       //GL11.glBegin(GL11.GL_TRIANGLES);
+       //GL11.glVertex3f( 0.5f, -0.5f, 0.0f);
+       //GL11.glVertex3f(-0.5f, -0.5f, 0.0f);
+       //GL11.glVertex3f( 0.0f,  0.5f, 0.0f);
+       //GL11.glEnd();
 
         this.mainWindow.swapBuffers();
     }
