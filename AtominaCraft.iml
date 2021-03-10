@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/library/lwjgl-assimp-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-assimp.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-bgfx-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-bgfx.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-glfw-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-glfw.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nanovg-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nanovg.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nuklear-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nuklear.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-openal-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-openal.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-opengl-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-opengl.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-par-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-par.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-stb-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-stb.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-vulkan.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/library/lwjgl-assimp-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-bgfx-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-glfw-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nanovg-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nuklear-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-openal-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-opengl-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-par-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-stb-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-vulkan-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/library/lwjgl-assimp-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-bgfx-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-glfw-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nanovg-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-nuklear-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-openal-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-opengl-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-par-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-stb-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/library/lwjgl-vulkan-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
