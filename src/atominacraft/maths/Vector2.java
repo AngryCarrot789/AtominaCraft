@@ -42,7 +42,7 @@ public class Vector2 {
 
     @Override
     public int hashCode() {
-        return HashHelper.getHashf(this.x, this.y);
+        return HashHelper.getHash2f(this.x, this.y);
     }
 
     @Override

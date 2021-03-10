@@ -38,7 +38,7 @@ public class Vector4 {
 
     @Override
     public int hashCode() {
-        return HashHelper.getHashf(this.x, this.y, this.z, this.w);
+        return HashHelper.getHash4f(this.x, this.y, this.z, this.w);
     }
 
     @Override

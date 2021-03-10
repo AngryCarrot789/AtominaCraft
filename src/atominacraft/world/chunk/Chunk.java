@@ -24,13 +24,17 @@ public class Chunk {
     }
 
     public void setBlock(Block block, int x, int y, int z) {
+        if (x > 15 || z > 15 || y > 255) {
+            return;
+        }
+
         if (block.location == null) {
             block.location = new BlockLocation(x, y, z);
         }
-        int hash = HashHelper.getHashi(x, y, z);
-        Block old = blocks.put(hash, block);
+        Block old = blocks.put(block.location.hashCode(), block);
         if (old != null) {
             old.onDestroyed();
+            System.out.println("Block Duplicate! at: " + x + ", " + y + ", " + z + "! Old at: " + old.location.toString());
         }
     }
 

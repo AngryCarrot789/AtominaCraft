@@ -1,5 +1,6 @@
 package atominacraft.world;
 
+import atominacraft.utils.HashHelper;
 import atominacraft.world.chunk.Chunk;
 import atominacraft.world.chunk.ChunkLocation;
 
@@ -42,13 +43,13 @@ public class World {
     }
 
     public Chunk getChunkAt(int x, int z) {
-        int hash = Integer.hashCode(x) + Integer.hashCode(z);
+        int hash = HashHelper.getHash2i(x, z);
         return chunks.get(hash);
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(this.worldId);
+        return HashHelper.getHash1i(this.worldId);
     }
 
     @Override

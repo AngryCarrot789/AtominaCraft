@@ -2,6 +2,8 @@ package atominacraft.block;
 
 import atominacraft.utils.HashHelper;
 
+import java.util.Objects;
+
 public class BlockLocation {
     public final int x;
     public final int y;
@@ -14,8 +16,13 @@ public class BlockLocation {
     }
 
     @Override
+    public String toString() {
+        return "BlockLocation{" + this.x + "," + this.y + "," + this.z + "}";
+    }
+
+    @Override
     public int hashCode() {
-        return HashHelper.getHashi(this.x, this.y, this.z);
+        return HashHelper.getHash3i(x, y, z);
     }
 
     @Override

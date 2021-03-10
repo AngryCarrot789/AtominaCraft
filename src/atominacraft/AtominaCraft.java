@@ -13,6 +13,7 @@ import atominacraft.maths.Vector3;
 import atominacraft.time.GameTime;
 import atominacraft.client.window.input.Input;
 import atominacraft.client.window.Window;
+import atominacraft.utils.HashHelper;
 import atominacraft.utils.ResourceLocator;
 import atominacraft.world.World;
 import atominacraft.world.WorldManager;
@@ -65,7 +66,12 @@ public class AtominaCraft {
         for(int y = 0; y < 32; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    chunk.setBlock(Block.TEMPLATE_DIRT.copyTemplate(), x, y, z);
+                    if (z < 8) {
+                        chunk.setBlock(Block.TEMPLATE_DIRT.copyTemplate(), x, y, z);
+                    }
+                    else {
+                        chunk.setBlock(Block.TEMPLATE_SNOW.copyTemplate(), x, y, z);
+                    }
                 }
             }
         }
@@ -129,7 +135,12 @@ public class AtominaCraft {
         for(Chunk chunk : mainPlayer.world.chunks.values()) {
             for(Block block : chunk.blocks.values()) {
                 Vector3 pos = GridLatch.WTMGetBlock(block.location);
-                DebugDrawing.drawCube(this.mainPlayer.camera, pos, GridLatch.BlockScaleV);
+                if (block.id == Block.TEMPLATE_DIRT.id) {
+                    DebugDrawing.drawCube(this.mainPlayer.camera, pos, GridLatch.BlockScaleV, 0.8f, 0.4f, 0.5f);
+                }
+                else if (block.id == Block.TEMPLATE_SNOW.id) {
+                    DebugDrawing.drawCube(this.mainPlayer.camera, pos, GridLatch.BlockScaleV, 1, 1, 1);
+                }
             }
         }
 

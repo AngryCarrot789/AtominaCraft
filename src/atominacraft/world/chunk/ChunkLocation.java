@@ -13,7 +13,7 @@ public class ChunkLocation {
 
     @Override
     public int hashCode() {
-        return HashHelper.getHashi(this.x, this.z);
+        return HashHelper.getHash2i(this.x, this.z);
     }
 
     @Override

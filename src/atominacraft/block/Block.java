@@ -7,6 +7,7 @@ public class Block {
     // placed or used... you must copy them. They never hold references, they're only copied
     public static final Block TEMPLATE_AIR = new Block(0, 0);
     public static final Block TEMPLATE_DIRT = new Block(1, 0);
+    public static final Block TEMPLATE_SNOW = new Block(10, 0);
 
     public int id;
     public int metadata;

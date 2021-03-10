@@ -100,7 +100,7 @@ public class Vector3 {
 
     @Override
     public int hashCode() {
-        return HashHelper.getHashf(this.x, this.y, this.z);
+        return HashHelper.getHash3f(this.x, this.y, this.z);
     }
 
     @Override
