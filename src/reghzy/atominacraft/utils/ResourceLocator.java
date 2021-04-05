@@ -1,14 +1,12 @@
 package reghzy.atominacraft.utils;
 
-import javafx.application.Preloader;
-
 import java.io.File;
 
 public class ResourceLocator {
-    public static File directory;
+    public static final File directory;
 
     public static void init() {
-        directory = new File("resources");
+
     }
 
     public static File getFile(String path) {
@@ -21,5 +19,9 @@ public class ResourceLocator {
 
     public static File getAssets() {
         return getFile("assets");
+    }
+
+    static {
+        directory = new File("resources");
     }
 }

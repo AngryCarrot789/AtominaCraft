@@ -56,6 +56,7 @@ public class CameraPlayer extends EntityPlayer {
 
         super.update();
         increaseMove(back, right, up);
+        super.updateCollision();
     }
 
     public void increaseMove(float back, float right, float up) {

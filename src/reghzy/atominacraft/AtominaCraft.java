@@ -1,6 +1,7 @@
 package reghzy.atominacraft;
 
 import reghzy.atominacraft.block.Block;
+import reghzy.atominacraft.block.BlockLocation;
 import reghzy.atominacraft.block.grid.GridLatch;
 import reghzy.atominacraft.client.GameSettings;
 import reghzy.atominacraft.client.render.RenderingManager;
@@ -10,6 +11,7 @@ import reghzy.atominacraft.client.render.WorldMeshMap;
 import reghzy.atominacraft.client.render.shader.PinkShader;
 import reghzy.atominacraft.client.render.texture.Texture;
 import reghzy.atominacraft.client.render.texture.TextureMap;
+import reghzy.atominacraft.collision.AxisAlignedBB;
 import reghzy.atominacraft.entity.Entity;
 import reghzy.atominacraft.entity.player.viewer.Camera;
 import reghzy.atominacraft.entity.player.viewer.CameraPlayer;
@@ -67,8 +69,7 @@ public class AtominaCraft {
             return false;
         }
         TextureMap.loadDefaultTextures();
-        RenderingManager.init();
-        RenderingManager.setupDefaultEntityRenderers();
+        RenderingManager.initEntityRenderer();
         WorldMeshMap.init();
 
         GLFW.glfwSetInputMode(this.mainWindow.getWindowId(), GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
@@ -80,19 +81,43 @@ public class AtominaCraft {
         mainPlayer = new CameraPlayer(earth, camera);
         mainPlayer.moveTo(new Vector3(0, 0, 4));
 
-        for(int x = -5; x <= 5; x++) {
-            for (int z = -5; z <= 5; z++) {
-                Chunk chunk = earth.createChunk(x, z);
+        Chunk chunk = earth.createChunk(0, 0);
 
-                for (int _x = 0; _x < 4; _x++) {
-                    for (int _z = 0; _z < 6; _z++) {
-                        chunk.setBlock(Block.TEMPLATE_DIRT.copyTemplate(), _x, x + 5, _z);
-                    }
+        for(int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 0; y < 5; y++) {
+                    Block block = Block.TEMPLATE_DIRT.copyTemplate();
+                    chunk.setBlock(block, x, y, z);
+                    block.boundingBox.setMin(block.location.x, block.location.y, block.location.z);
+                    block.boundingBox.setMax(block.location.x + GridLatch.BlockWidth,
+                                             block.location.y + GridLatch.BlockWidth,
+                                             block.location.z + GridLatch.BlockWidth);
                 }
             }
         }
 
-        Chunk center = earth.getChunkAt(0, 0);
+        Block block = Block.TEMPLATE_DIRT.copyTemplate();
+        chunk.setBlock(block, 8, 10, 8);
+        block.boundingBox.setMin(block.location.x, block.location.y, block.location.z);
+        block.boundingBox.setMax(block.location.x + GridLatch.BlockWidth,
+                                 block.location.y + GridLatch.BlockWidth,
+                                 block.location.z + GridLatch.BlockWidth);
+
+        //for(int x = -5; x <= 5; x++) {
+        //    for (int z = -5; z <= 5; z++) {
+        //        Chunk chunk = earth.createChunk(x, z);
+
+        //        for (int _x = 0; _x < 4; _x++) {
+        //            for (int _z = 0; _z < 6; _z++) {
+        //                int y = x + 5;
+        //                Block block = Block.TEMPLATE_DIRT.copyTemplate();
+        //                block.boundingBox = new AxisAlignedBB(GridLatch.WTMGetBlockInWorldFromChunk(chunk.coordinates, new BlockLocation(x, y, z)), GridLatch.BlockScaleV);
+        //                chunk.setBlock(block, _x, y, _z);
+        //            }
+        //        }
+        //    }
+        //}
+
         //earth.activeEntities.add(new EntityCubeFollower(this.mainPlayer, earth));
 
         //for(int y = 0; y < 1; y++) {
@@ -144,7 +169,6 @@ public class AtominaCraft {
                 update();
                 GameTime.update_previousTicks = System.currentTimeMillis();
             }
-
             //GameTime.render_currentTicks = System.currentTimeMillis();
             //GameTime.render_ticksDifference = (GameTime.render_currentTicks - GameTime.render_previousTicks);
             //if (GameTime.render_ticksDifference > GameSettings.renderMillis) {
@@ -152,7 +176,6 @@ public class AtominaCraft {
             render();
             //    GameTime.render_previousTicks = System.currentTimeMillis();
             //}
-
 
             GameTime.totalTicks++;
         }
@@ -173,7 +196,6 @@ public class AtominaCraft {
         this.mainPlayer.camera.updateSize(this.mainWindow);
 
         Matrix4 cam = this.mainPlayer.camera.matrix();
-
         World world = mainPlayer.world;
 
         for (Entity entity : world.getEntities()) {
@@ -187,6 +209,8 @@ public class AtominaCraft {
             }
 
             for (Block block : chunk.blocks.values()) {
+                Tesselator.drawBoundingBox(this.mainPlayer.camera, block.boundingBox);
+
                 Texture texture = TextureMap.getTextureFromBlock(block.id);
                 if (texture != null) {
                     texture.use();

@@ -1,5 +1,6 @@
 package reghzy.atominacraft.block;
 
+import reghzy.atominacraft.collision.AxisAlignedBB;
 import reghzy.atominacraft.utils.HashHelper;
 import reghzy.atominacraft.world.World;
 import reghzy.atominacraft.world.chunk.Chunk;
@@ -18,10 +19,12 @@ public class Block {
     public World world;
     public Chunk chunk;
     public BlockLocation location;
+    public final AxisAlignedBB boundingBox;
 
     public Block(int id, int metadata) {
         this.id = id;
         this.metadata = metadata;
+        this.boundingBox = new AxisAlignedBB();
     }
 
     public Block(World world, BlockLocation location, int id, int metadata) {

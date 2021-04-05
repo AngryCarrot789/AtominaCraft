@@ -1,6 +1,8 @@
 package reghzy.atominacraft.entity;
 
+import reghzy.atominacraft.block.Block;
 import reghzy.atominacraft.block.grid.GridLatch;
+import reghzy.atominacraft.collision.AxisAlignedBB;
 import reghzy.atominacraft.maths.Maths;
 import reghzy.atominacraft.maths.Matrix4;
 import reghzy.atominacraft.maths.Vector3;
@@ -29,6 +31,8 @@ public class Entity {
     public Vector3 previousPosition;
     public Vector3 positionDifference;
 
+    public AxisAlignedBB boundingBox;
+
     public World world;
     private Chunk chunk;
 
@@ -53,6 +57,7 @@ public class Entity {
         this.velocity = new Vector3();
         this.euler = new Vector3();
         this.scale = new Vector3();
+        this.boundingBox = AxisAlignedBB.fromCenterScale(position, scale);
 
         this.ticksExisted = 0;
     }
@@ -68,6 +73,21 @@ public class Entity {
         this.chunk = this.world.getChunkAt(ChunkLocation.hash(GridLatch.MTWGetChunk(this.position.x), GridLatch.MTWGetChunk(this.position.z)));
     }
 
+    public void updateCollision() {
+        boundingBox.repositionFromCenterAndScale(this.position, this.scale);
+
+        if (this.getChunk() != null) {
+            Chunk chunk = getChunk();
+
+            for (Block block : chunk.blocks.values()) {
+                if (this.boundingBox.intersectsAABB(block.boundingBox)) {
+                    Vector3 intersection = this.boundingBox.getIntersectAmount(block.boundingBox);//.clampPositive().invertUnit();
+                    Vector3 direction = this.boundingBox.intersectDirection(block.boundingBox);
+                    this.position.subtract(intersection.multiply(direction));
+                }
+            }
+        }
+    }
 
     public void moveTo(Vector3 position) {
         this.previousPosition.set(this.position);

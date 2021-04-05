@@ -199,6 +199,47 @@ public class Vector3 {
     }
 
     /**
+     * Clamps any negative number to 0, leaves positive numbers
+     * as they are, and returns this vector instance (not a copy)
+     * @return
+     */
+    public Vector3 clampPositive() {
+        if (this.x < 0)
+            this.x = 0;
+        if (this.y < 0)
+            this.y = 0;
+        if (this.z < 0)
+            this.z = 0;
+        return this;
+    }
+
+    /**
+     * If the X/Y/Z value is 0, it becomes 1. otherwise, if it's bigger than 0, it becomes 0
+     * @return
+     */
+    public Vector3 invertUnit() {
+        if (this.x == 0) {
+            this.x = 1;
+        }
+        else {
+            this.x = 0;
+        }
+        if (this.y == 0) {
+            this.y = 1;
+        }
+        else {
+            this.y = 0;
+        }
+        if (this.z == 0) {
+            this.z = 1;
+        }
+        else {
+            this.z = 0;
+        }
+        return this;
+    }
+
+    /**
      * returns a vector containing the values of a multiplication between the given matrix and the given vector
      * @param m
      * @param v
